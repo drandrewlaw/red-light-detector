@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Red Light Detector - Fresno Traffic Monitoring",
-  description: "Real-time red light violation detection using AI-powered livestream analysis",
+  title: "Traffic Cam Agent - Fresno Traffic Monitoring",
+  description: "Real-time traffic density tracking and red light violation detection using AI",
 };
 
 export default function RootLayout({

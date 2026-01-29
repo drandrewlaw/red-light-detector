@@ -103,6 +103,16 @@ export default function Home() {
     }
   }, [isMonitoring, fetchViolations, fetchDensityReadings]);
 
+  // Auto-poll density every 60 seconds when on density tab
+  useEffect(() => {
+    if (activeTab === 'density') {
+      const interval = setInterval(() => {
+        checkDensityNow();
+      }, 60000); // Every 60 seconds
+      return () => clearInterval(interval);
+    }
+  }, [activeTab]);
+
   // Start monitoring
   const handleStart = async () => {
     setIsLoading(true);
@@ -201,8 +211,8 @@ export default function Home() {
             <button
               onClick={() => setActiveTab('density')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${activeTab === 'density'
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700'
+                ? 'bg-blue-500 text-white'
+                : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700'
                 }`}
             >
               📊 Traffic Density
@@ -210,8 +220,8 @@ export default function Home() {
             <button
               onClick={() => setActiveTab('violations')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${activeTab === 'violations'
-                  ? 'bg-red-500 text-white'
-                  : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700'
+                ? 'bg-red-500 text-white'
+                : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700'
                 }`}
             >
               🚨 Red Light Violations

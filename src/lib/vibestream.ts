@@ -38,7 +38,7 @@ export interface JobStatus {
  * Start continuous monitoring job
  */
 export async function startWatch(request: StartWatchRequest): Promise<WatchResponse> {
-    const response = await fetch(`${VIBESTREAM_API_URL}/watch`, {
+    const response = await fetch(`${VIBESTREAM_API_URL}/live-monitor`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -49,6 +49,7 @@ export async function startWatch(request: StartWatchRequest): Promise<WatchRespo
             webhook_url: request.webhook_url,
             interval_seconds: request.interval_seconds || 15,
             model: request.model || 'gemini-2.5-flash',
+            enable_prefilter: true,
         }),
     });
 
